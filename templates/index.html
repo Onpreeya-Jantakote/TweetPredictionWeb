@@ -1,0 +1,270 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>vaccination</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@300..700&display=swap" rel="stylesheet">
+    <style>
+    *{
+        font-family: "Quicksand", sans-serif;
+    }
+    body {
+        margin-top: 50px;
+        padding: 0;
+        background-repeat: no-repeat;
+        background-size: cover;
+        background: rgb(63,94,251);
+        background: radial-gradient(circle, rgba(63,94,251,1) 0%, rgba(252,70,107,1) 100%);
+        height: 100vh;
+    }
+    h2 {
+        border-right: solid 3px rgba(217, 35, 184, 0.75);
+        white-space: nowrap;
+        overflow: hidden;    
+        font-family: 'Source Code Pro', monospace;  
+        font-size: 28px;
+        color: #ffffff;;
+        margin: 0 auto;
+    }
+
+    /* Animation */
+    h2 {
+    animation: animated-text 4s steps(29,end) 1s 1 normal both,
+                animated-cursor 600ms steps(29,end) infinite;
+    }
+
+    /* text animation */
+
+    @keyframes animated-text{
+    from{width: 0;}
+    to{width: 320px;}
+    }
+
+    /* cursor animations */
+
+    @keyframes animated-cursor{
+    from{border-right-color: rgba(255, 255, 255, 0.75);}
+    to{border-right-color: transparent;}
+    }
+
+    .container {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .center {
+        width: 400px;
+        background: rgba(239, 161, 255, 0.3); /* สีพื้นหลังโปร่งแสง */
+        backdrop-filter: blur(10px); /* ปรับความเบลอ */
+        border-radius: 10px;
+        padding: 20px;
+        box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+    }
+
+    form {
+        margin-bottom: 20px;
+    }
+    form .txt_field{
+        position: relative;
+        border-bottom: 1.5px solid #ffffffd8;
+        margin: 30px 0;
+    }
+
+    input[type=number]::-webkit-inner-spin-button, 
+    input[type=number]::-webkit-outer-spin-button { 
+        -webkit-appearance: none;
+        margin: 0; 
+    }
+
+    label {
+        display: block;
+        margin-bottom: 5px;
+        font-weight: bold;
+    }
+
+    .txt_field input{
+        width: 100%;
+        padding: 0 5px;
+        height: 40px;
+        font-size: 16px;
+        border: none;
+        background: none;
+        outline: none;
+        color: #fff;
+    }
+    .txt_field label{
+        position: absolute;
+        top: 50%;
+        left: 5px;
+        color: #ffffff98;
+        transform: translateY(-50%);
+        font-size: 12px;
+        pointer-events: none;
+    }
+    .txt_field span::before{
+        content: '';
+        position: absolute;
+        top: 40px;
+        left: 0;
+        width: 0px;
+        height: 2px;
+        background: #ffffff98;
+        transition: .5s;
+    }
+    .txt_field input:focus ~ label,
+    .txt_field input:valid ~ label{
+        top: -5px;
+        color: rgba(255, 255, 255, 0.7);
+    }
+    .txt_field input:focus ~ span::before,
+    .txt_field input:valid ~ span::before{
+        width: 100%;
+    }
+
+    input[type="submit"] {
+        width: 100%;
+        height: 50px;
+        border: none;
+        border-radius: 25px;
+        font-size: 18px;
+        font-weight: 700;
+        cursor: pointer;
+        color: #ff638f;
+    }
+
+    input[type="submit"]:hover {
+        background: #ff638f;
+        color: #e9f4fb;
+        transition: .5s;
+    }
+
+    .result {
+        text-align: center;
+        color: #ffffff;
+    }
+
+    table {
+        text-align: center;
+        border-radius: 0.50em;
+        border-collapse: collapse;
+        margin: 1em;
+        background: rgba(255, 162, 227, 0.3);
+        backdrop-filter: blur(10px);
+        box-shadow: 0px 0px 20px rgb(255, 176, 213);
+    }
+    th {
+        border-bottom: 1px solid #ffffff;
+        color: #ffd900;
+        font-size: 0.85em;
+        font-weight: 600;
+        padding: 0.5em 1em;
+    }
+    td {
+        color: #fff;
+        font-weight: 400;
+        font-size: 0.65em;
+        padding: 0.65em 1em;
+    }
+    tbody tr {
+        transition: background 0.25s ease;
+    }
+    tbody tr:hover {
+        background: rgba(255, 0, 183, 0.229);
+    }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="center">
+            <h2 style="text-align: center;">User Information</h2>
+            <form action="/predict" method="post">
+                <div class="txt_field">
+                    <input type="text" id="user_name" name="user_name" required>
+                    <span></span>
+                    <label>Name</label>
+                </div>
+                
+                <div class="txt_field">
+                    <input type="text" id="user_location" name="user_location"  required>
+                    <span></span>
+                    <label>Location</label>
+                </div>
+
+                <div class="txt_field">
+                    <input id="user_description" name="user_description"  required>
+                    <span></span>
+                    <label>Description</label>
+                </div>
+
+                <div class="txt_field">
+                    <input id="text" name="text" required>
+                    <span></span>
+                    <label>Text</label>
+                </div>
+
+                <div class="txt_field">
+                    <input type="text" id="hashtags" name="hashtags" required>
+                    <span></span>
+                    <label>Hashtags</label>
+                </div>
+
+                <div class="txt_field">
+                    <input type="number" id="retweets" name="retweets" min="0" required>
+                    <span></span>
+                    <label>Retweets (number)</label>
+                </div>
+
+                <div class="txt_field">
+                    <input type="number" id="favorites" name="favorites" min="0" required>
+                    <span></span>
+                    <label>Favorites (number)</label>
+                </div>
+                <input type="submit" value="Predict">
+            </form>
+        </div>
+    </div>
+
+    <!-- Display the result if available -->
+    {% if sentiment_result %}
+    <div class="result">
+        <h3>Prediction Result: {{ sentiment_result }}</h3>
+    </div>
+    {% endif %}
+
+    <!-- Display the table with the first 50 rows -->
+    <!-- <h3 style="text-align: center;">Example Data</h3> -->
+    <table>
+        <thead>
+            <tr>
+                <th>User Name</th>
+                <th>Location</th>
+                <th>Description</th>
+                <th>Text</th>
+                <th>Hashtags</th>
+                <th>Retweets</th>
+                <th>Favorites</th>
+                <th>Is_retweet </th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for row in data_50 %}
+            <tr class="active-row">
+                <td>{{ row['user_name'] }}</td>
+                <td>{{ row['user_location'] }}</td>
+                <td>{{ row['user_description'] }}</td>
+                <td>{{ row['text'] }}</td>
+                <td>{{ row['hashtags'] }}</td>
+                <td>{{ row['retweets'] }}</td>
+                <td>{{ row['favorites'] }}</td>
+                <td>{{ row['is_retweet'] }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</body>
+</html>
